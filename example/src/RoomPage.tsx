@@ -50,7 +50,7 @@ export const RoomPage = () => {
     <DisplayContext.Provider value={displayOptions}>
       <div className="roomContainer">
         <div className="topBar">
-          <h2>LiveKit Video</h2>
+          <h2>Panggung Streamer</h2>
           <div className="right">
             <div>
               <input

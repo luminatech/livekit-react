@@ -124,11 +124,11 @@ export const PreJoinPage = () => {
   return (
     <div className="prejoin">
       <main>
-        <h2>LiveKit Video</h2>
+        <h2>Yuk Manggung Live Lumina!</h2>
         <hr />
         <div className="entrySection">
           <div>
-            <div className="label">LiveKit URL</div>
+            <div className="label">Server URL</div>
             <div>
               <input type="text" name="url" value={url} onChange={(e) => setUrl(e.target.value)} />
             </div>
@@ -205,14 +205,6 @@ export const PreJoinPage = () => {
           </div>
         </div>
       </main>
-      <footer>
-        This page is built with <a href="https://github.com/livekit/livekit-react">LiveKit React</a>
-        &nbsp; (
-        <a href="https://github.com/livekit/livekit-react/blob/master/example/src/PreJoinPage.tsx">
-          source
-        </a>
-        )
-      </footer>
     </div>
   );
 };
