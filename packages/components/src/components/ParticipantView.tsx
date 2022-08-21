@@ -128,7 +128,7 @@ export const ParticipantView = ({
       />
     );
   } else {
-    mainElement = <div className={styles.placeholder} />;
+    mainElement = null;
   }
 
   const classes = [styles.participant];
