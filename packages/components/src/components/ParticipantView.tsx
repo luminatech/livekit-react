@@ -128,7 +128,11 @@ export const ParticipantView = ({
       />
     );
   } else {
-    mainElement = <div className={styles.placeholder} />;
+    if (isLocal) {
+      mainElement = <div className={styles.placeholder}/>
+    } else {
+      mainElement = <div className={styles.hidden}/>
+    }
   }
 
   const classes = [styles.participant];

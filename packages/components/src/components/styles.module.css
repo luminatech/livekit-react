@@ -23,6 +23,10 @@ video.video {
   height: 100%;
 }
 
+.hidden {
+  display: hidden;
+}
+
 .participantBar {
   box-sizing: border-box;
   position: absolute;
