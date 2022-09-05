@@ -19,30 +19,38 @@ export const GridStage = ({
   // compute visible participants and sort.
   useEffect(() => {
     // determine grid size
-    let numVisible = 1;
-    if (participants.length === 1) {
+    let numVisible = 0;
+    participants.forEach((p) => {
+      if (p.permissions?.canPublish) {
+        numVisible += 1;
+      }
+    });
+    if (numVisible === 1) {
       setGridClass(styles.grid1x1);
-    } else if (participants.length === 2) {
+    } else if (numVisible === 2) {
       setGridClass(styles.grid2x1);
       numVisible = 2;
-    } else if (participants.length <= 4) {
+    } else if (numVisible <= 4) {
       setGridClass(styles.grid2x2);
-      numVisible = Math.min(participants.length, 4);
-    } else if (participants.length <= 9) {
+      numVisible = Math.min(numVisible, 4);
+    } else if (numVisible <= 9) {
       setGridClass(styles.grid3x3);
-      numVisible = Math.min(participants.length, 9);
-    } else if (participants.length <= 16) {
+      numVisible = Math.min(numVisible, 9);
+    } else if (numVisible <= 16) {
       setGridClass(styles.grid4x4);
-      numVisible = Math.min(participants.length, 16);
+      numVisible = Math.min(numVisible, 16);
     } else {
       setGridClass(styles.grid5x5);
-      numVisible = Math.min(participants.length, 25);
+      numVisible = Math.min(numVisible, 25);
     }
 
     // remove any participants that are no longer connected
     const newParticipants: Participant[] = [];
-    visibleParticipants.forEach((p) => {
-      if (room?.participants.has(p.sid) || room?.localParticipant.sid === p.sid) {
+    participants.forEach((p) => {
+      if (
+        (room?.participants.has(p.sid) || room?.localParticipant.sid === p.sid) &&
+        p.permissions?.canPublish
+      ) {
         newParticipants.push(p);
       }
     });
