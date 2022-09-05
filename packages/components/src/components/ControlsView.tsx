@@ -85,6 +85,10 @@ export const ControlsView = ({
     );
   }
 
+  const screenShareCaptureOptions = {
+    audio: true,
+  };
+
   const [screenButtonDisabled, setScreenButtonDisabled] = React.useState(false);
   let screenButton: ReactElement | undefined;
   if (enableScreenShare) {
@@ -97,7 +101,7 @@ export const ControlsView = ({
         onClick={() => {
           setScreenButtonDisabled(true);
           room.localParticipant
-            .setScreenShareEnabled(!enabled)
+            .setScreenShareEnabled(!enabled, screenShareCaptureOptions)
             .finally(() => setScreenButtonDisabled(false));
         }}
       />

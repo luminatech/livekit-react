@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const PreJoinPage = () => {
   // state to pass onto room
-  const [url, setUrl] = useState('ws://localhost:7880');
+  const [url, setUrl] = useState('wss://livekitpoc.lumina.mba');
   const [token, setToken] = useState<string>('');
   const [simulcast, setSimulcast] = useState(true);
   const [dynacast, setDynacast] = useState(true);
@@ -123,20 +123,20 @@ export const PreJoinPage = () => {
 
   return (
     <div className="prejoin">
-      <main>
-        <h2>Yuk Manggung Live Lumina!</h2>
-        <hr />
-        <div className="entrySection">
-          <div>
+      <main style={{"display": "flex", "flexDirection": "column", "justifyContent": "center", "alignItems": "center"}}>
+        <h2>Panggung Live Lumina</h2>
+
+        <div className="entrySection" style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
+          <div style={{"display": "none"}}>
             <div className="label">Server URL</div>
             <div>
               <input type="text" name="url" value={url} onChange={(e) => setUrl(e.target.value)} />
             </div>
           </div>
-          <div>
-            <div className="label">Token</div>
-            <div>
+          <div style={{"paddingBottom": "20px"}}>
+            <div style={{"width": "400px"}}>
               <input
+                placeholder="Masukkan token kamu disini..."
                 type="text"
                 name="token"
                 value={token}
@@ -144,7 +144,9 @@ export const PreJoinPage = () => {
               />
             </div>
           </div>
-          <div className="options">
+        </div>
+
+        <div className="options" style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
             <div>
               <input
                 id="simulcast-option"
@@ -176,13 +178,12 @@ export const PreJoinPage = () => {
               <label htmlFor="adaptivestream-option">Adaptive Stream</label>
             </div>
           </div>
-        </div>
 
         <div className="videoSection">
           <AspectRatio ratio={16 / 9}>{videoElement}</AspectRatio>
         </div>
 
-        <div className="controlSection">
+        <div className="controlSection" style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
           <div>
             <AudioSelectButton
               isMuted={!audioEnabled}
@@ -194,8 +195,6 @@ export const PreJoinPage = () => {
               onClick={toggleVideo}
               onSourceSelected={selectVideoDevice}
             />
-          </div>
-          <div className="right">
             <ControlButton
               label="Connect"
               disabled={connectDisabled}
