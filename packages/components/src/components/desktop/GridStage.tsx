@@ -21,8 +21,11 @@ export const GridStage = ({
     // determine grid size
     let numVisible = 0;
     participants.forEach((p) => {
-      if (p.permissions?.canPublish) {
-        numVisible += 1;
+      if (p.permissions?.canPublish && p.metadata) {
+        const participantMetadata = JSON.parse(String(p.metadata));
+        if (participantMetadata.user_type === 'streamer') {
+          numVisible += 1;
+        }
       }
     });
     if (numVisible === 1) {
