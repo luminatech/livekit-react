@@ -82,18 +82,24 @@ export const SpeakerStage = ({
         <div className={styles.stageCenter}>{mainView}</div>
         <div className={styles.sidebar}>
           {otherParticipants.map((participant) => {
-            return (
-              <ParticipantRenderer
-                key={participant.identity}
-                participant={participant}
-                width="100%"
-                aspectWidth={16}
-                aspectHeight={9}
-                showOverlay={showOverlay}
-                onMouseEnter={() => setShowOverlay(true)}
-                onMouseLeave={() => setShowOverlay(false)}
-              />
-            );
+            console.log('hehe', participant);
+            // @ts-ignore
+            if (participant.metadata?.user_type === 'streamer') {
+              return (
+                <ParticipantRenderer
+                  key={participant.identity}
+                  participant={participant}
+                  width="100%"
+                  aspectWidth={16}
+                  aspectHeight={9}
+                  showOverlay={showOverlay}
+                  onMouseEnter={() => setShowOverlay(true)}
+                  onMouseLeave={() => setShowOverlay(false)}
+                />
+              );
+            } else {
+              return <div></div>;
+            }
           })}
         </div>
       </div>

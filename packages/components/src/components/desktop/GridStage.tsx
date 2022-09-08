@@ -22,7 +22,7 @@ export const GridStage = ({
     let numVisible = 0;
     participants.forEach((p) => {
       if (p.permissions?.canPublish && p.metadata) {
-        const participantMetadata = JSON.parse(String(p.metadata));
+        const participantMetadata: any = JSON.parse(String(p.metadata));
         if (participantMetadata.user_type === 'streamer') {
           numVisible += 1;
         }
@@ -52,7 +52,8 @@ export const GridStage = ({
     participants.forEach((p) => {
       if (
         (room?.participants.has(p.sid) || room?.localParticipant.sid === p.sid) &&
-        p.permissions?.canPublish
+        p.permissions?.canPublish &&
+        p.metadata
       ) {
         newParticipants.push(p);
       }
