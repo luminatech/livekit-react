@@ -82,7 +82,6 @@ export const SpeakerStage = ({
         <div className={styles.stageCenter}>{mainView}</div>
         <div className={styles.sidebar}>
           {otherParticipants.map((participant) => {
-            console.log('hehe', participant);
             // @ts-ignore
             if (participant.metadata?.user_type === 'streamer') {
               return (
