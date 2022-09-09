@@ -85,7 +85,7 @@ export const SpeakerStage = ({
           {otherParticipants.map((participant) => {
             // @ts-ignore
             let metadata = '';
-            let userType = 'bot';
+            let userType = 'user';
             if (participant.metadata !== '') {
               metadata = JSON.parse(String(participant.metadata));
               // @ts-ignore
