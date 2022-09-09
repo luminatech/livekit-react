@@ -74,6 +74,7 @@ export const SpeakerStage = ({
       />
     );
   }
+  console.log('otherParticipants', otherParticipants);
 
   return (
     // global container
@@ -83,7 +84,15 @@ export const SpeakerStage = ({
         <div className={styles.sidebar}>
           {otherParticipants.map((participant) => {
             // @ts-ignore
-            if (participant.metadata?.user_type === 'streamer') {
+            let metadata = '';
+            let userType = 'bot';
+            if (participant.metadata !== '') {
+              metadata = JSON.parse(String(participant.metadata));
+              // @ts-ignore
+              userType = metadata.user_type;
+            }
+
+            if (userType === 'streamer') {
               return (
                 <ParticipantRenderer
                   key={participant.identity}

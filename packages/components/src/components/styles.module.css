@@ -110,6 +110,11 @@ video.video {
 
 button.dangerButton {
   background: #981010;
+  margin-left: 8px;
+}
+
+button.marginLeftButton {
+  margin-left: 4px;
 }
 
 button.dangerButton:hover {

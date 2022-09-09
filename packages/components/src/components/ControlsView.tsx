@@ -95,6 +95,7 @@ export const ControlsView = ({
     const enabled = room.localParticipant.isScreenShareEnabled;
     screenButton = (
       <ControlButton
+        className={styles.marginLeftButton}
         label={enabled ? 'Stop sharing' : 'Share screen'}
         icon={enabled ? faStop : faDesktop}
         disabled={screenButtonDisabled}
