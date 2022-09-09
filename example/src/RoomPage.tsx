@@ -1,4 +1,4 @@
-import { faSquare, faThLarge, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Room, RoomEvent, setLogLevel, VideoPresets } from 'livekit-client';
 import { DisplayContext, DisplayOptions, LiveKitRoom } from '@livekit/react-components';
@@ -8,10 +8,10 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 export const RoomPage = () => {
   const [numParticipants, setNumParticipants] = useState(0);
-  const [displayOptions, setDisplayOptions] = useState<DisplayOptions>({
+  const displayOptions = {
     stageLayout: 'grid',
     showStats: false,
-  });
+  } as DisplayOptions;
   const navigate = useNavigate();
   const query = new URLSearchParams(useLocation().search);
   const url = query.get('url');
@@ -39,51 +39,14 @@ export const RoomPage = () => {
     }
   };
 
-  const updateOptions = (options: DisplayOptions) => {
-    setDisplayOptions({
-      ...displayOptions,
-      ...options,
-    });
-  };
-
   return (
     <DisplayContext.Provider value={displayOptions}>
       <div className="roomContainer">
         <div className="topBar">
-          <h2>Panggung Streamer</h2>
-          <div className="right">
-            <div>
-              <input
-                id="showStats"
-                type="checkbox"
-                onChange={(e) => updateOptions({ showStats: e.target.checked })}
-              />
-              <label htmlFor="showStats">Show Stats</label>
-            </div>
-            <div>
-              <button
-                className="iconButton"
-                disabled={displayOptions.stageLayout === 'grid'}
-                onClick={() => {
-                  updateOptions({ stageLayout: 'grid' });
-                }}
-              >
-                <FontAwesomeIcon height={32} icon={faThLarge} />
-              </button>
-              <button
-                className="iconButton"
-                disabled={displayOptions.stageLayout === 'speaker'}
-                onClick={() => {
-                  updateOptions({ stageLayout: 'speaker' });
-                }}
-              >
-                <FontAwesomeIcon height={32} icon={faSquare} />
-              </button>
-            </div>
-            <div className="participantCount">
-              <FontAwesomeIcon icon={faUserFriends} />
-              <span>{numParticipants}</span>
-            </div>
+          <h2>Panggung Live Lumina</h2>
+          <div className="participantCount">
+            <FontAwesomeIcon icon={faUserFriends} />
+            <span>{numParticipants}</span>
           </div>
         </div>
         <LiveKitRoom

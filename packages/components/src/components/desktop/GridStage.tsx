@@ -20,9 +20,12 @@ export const GridStage = ({
   useEffect(() => {
     // determine grid size
     let numVisible = 0;
-    participants.forEach((p) => {
-      if (p.permissions?.canPublish) {
-        numVisible += 1;
+    participants.forEach((participant: Participant) => {
+      if (participant.permissions?.canPublish && participant.metadata) {
+        const participantMetadata: any = JSON.parse(String(participant.metadata));
+        if (participantMetadata.user_type === 'streamer') {
+          numVisible += 1;
+        }
       }
     });
     if (numVisible === 1) {
@@ -46,12 +49,14 @@ export const GridStage = ({
 
     // remove any participants that are no longer connected
     const newParticipants: Participant[] = [];
-    participants.forEach((p) => {
+    participants.forEach((participant: Participant) => {
       if (
-        (room?.participants.has(p.sid) || room?.localParticipant.sid === p.sid) &&
-        p.permissions?.canPublish
+        (room?.participants.has(participant.sid) ||
+          room?.localParticipant.sid === participant.sid) &&
+        participant.permissions?.canPublish &&
+        participant.metadata
       ) {
-        newParticipants.push(p);
+        newParticipants.push(participant);
       }
     });
 

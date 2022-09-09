@@ -83,18 +83,31 @@ export const MobileStage = ({
       <div className={styles.stage}>{mainView}</div>
       <div className={styles.participantsArea}>
         {otherParticipants.map((participant) => {
-          return (
-            <ParticipantRenderer
-              key={participant.identity}
-              participant={participant}
-              className={styles.participant}
-              aspectWidth={4}
-              aspectHeight={3}
-              showOverlay={showOverlay}
-              onMouseEnter={() => setShowOverlay(true)}
-              onMouseLeave={() => setShowOverlay(false)}
-            />
-          );
+          // @ts-ignore
+          let metadata = '';
+          let userType = 'user';
+          if (participant.metadata !== '') {
+            metadata = JSON.parse(String(participant.metadata));
+            // @ts-ignore
+            userType = metadata.user_type;
+          }
+
+          if (userType === 'streamer') {
+            return (
+              <ParticipantRenderer
+                key={participant.identity}
+                participant={participant}
+                className={styles.participant}
+                aspectWidth={4}
+                aspectHeight={3}
+                showOverlay={showOverlay}
+                onMouseEnter={() => setShowOverlay(true)}
+                onMouseLeave={() => setShowOverlay(false)}
+              />
+            );
+          } else {
+            return <div></div>;
+          }
         })}
       </div>
       <div className={styles.controlsArea}>
