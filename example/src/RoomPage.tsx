@@ -8,10 +8,10 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 export const RoomPage = () => {
   const [numParticipants, setNumParticipants] = useState(0);
-  const [displayOptions] = useState<DisplayOptions>({
+  const displayOptions = {
     stageLayout: 'grid',
     showStats: false,
-  });
+  } as DisplayOptions;
   const navigate = useNavigate();
   const query = new URLSearchParams(useLocation().search);
   const url = query.get('url');
